@@ -5,9 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/buttons.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"> -->
     <title>Document</title>
     <script src="./js/mapdata100.js"></script>
 </head>
@@ -21,13 +24,13 @@
         <div class="screen" id="screen">
             <canvas></canvas>
         </div>
-        <!-- <div> -->
+        <div id="contral">
             <div class="buttonItem">
                 <button class="button button-block button-rounded button-primary button-large"
                     onclick="Prev()" id="back">撤销</button>
                 <button class="button button-block button-rounded button-caution button-large"
                     onclick="init();" id="refresh">重置</button>
-                <div class="blank"></div>
+                <div class="blank" id="blank"></div>
                 <input type="number" name="level" id="level">
                 <button class="button button-block button-rounded button-primary button-large"
                     onclick="setLevel()" id="setLevel">选关</button>
@@ -39,12 +42,12 @@
                 </div>
                 <!-- <button class="button button-primary button-rounded button-small"class="previous round" onclick="previousLevel()">&#8249;</a>
                         <button class="button button-primary button-rounded button-small"class="next round" onclick="nextLevel()">&#8250;</a> -->
-            <!-- </div> -->
+            </div>
             <div class="moveButton">
-                <button id="up" onclick="ListenKey(38)">上</button>
-                <button id="left" onclick="ListenKey(37)">左</button>
-                <button id="right" onclick="ListenKey(39)">右</button>
-                <button id="down" onclick="ListenKey(40)">下</button>
+                <button class="button button-3d button-highlight button-circle button-giant" id="up" onclick="ListenKey(38)"><i class="fas fa-arrow-up"></i></button>
+                <button class="button button-3d button-primary button-circle button-giant" id="left" onclick="ListenKey(37)"><i class="fas fa-arrow-left"></i></button>
+                <button class="button button-3d button-caution button-circle button-giant" id="right" onclick="ListenKey(39)"><i class="fas fa-arrow-right"></i></button>
+                <button class="button button-3d button-action button-circle button-giant" id="down" onclick="ListenKey(40)"><i class="fas fa-arrow-down"></i></button>
             </div>
         </div>
 

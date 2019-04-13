@@ -308,7 +308,7 @@ function setLevel() {
     let level = document.getElementById("level").value-1;
     if (!Number.isInteger(level)) {
         alert("请输入1-100的正整数");
-        
+
         return false;
     }
     iCurlevel = level;

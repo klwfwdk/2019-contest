@@ -23,6 +23,11 @@
     border-radius: 50%;
 }
 
+.button-pill{
+    width: 50%;
+    padding-left:35px !important; 
+    padding-right:35px !important;  
+}
 input{
     border:none;
     background-color: transparent;
@@ -33,7 +38,7 @@ input{
     line-height:40px;
     width: 170.656px;
     text-align:center;
-    vertical-align: bottom;
+    Mobile-align: bottom;
 }
 
 input:focus{
@@ -71,7 +76,11 @@ html, body{
 
 }
 
-
+.Pc #contral{
+    width: 180px;
+    float: right;
+    height: 100%;
+}
 
 .Pc  .moveButton{
     display: none;
@@ -96,13 +105,14 @@ html, body{
 
 .Pc .buttonItem>div.blank{
     height: 100%;
+    text-align: center;
     flex-grow: 1;
 }
 /**
 手机端相关样式
 */
 
-.Horizontal .gameBox,.Vertical .gameBox{
+.Horizontal .gameBox,.Mobile .gameBox{
     width: 100%;
     height: 100%;
     float: left;
@@ -121,10 +131,10 @@ html, body{
     text-align: center;
 }
 /* 
-.Horizontal input#level, .Vertical input#level{
+.Horizontal input#level, .Mobile input#level{
    width: 10;
 } */
-.Vertical #gameInfo{
+.Mobile #gameInfo{
 
     position: static;
     background-image: url(../image/block.png);
@@ -132,29 +142,71 @@ html, body{
     padding-top: 10px
 }
 
-.Vertical .buttonItem{
-    height: 400px;
+.Mobile .buttonItem{
+    height: 250px;
     width: 150px;
     padding: 20px;
-}
-
-.Vertical #back{
     float: left;
 }
 
-.Vertical #refresh{
+.Mobile #back{
+    float: left;
+}
+
+.Mobile #refresh{
     float: right;
 }
 
-.Vertical input{
+.Mobile input{
 width: 50px;
 float: left;
 line-height:50px;
 color: aliceblue;
 }
-.Vertical #setLevel{
+.Mobile #setLevel{
     float: right;
 }
-.Vertical .blank{
-    height: 20%;
+.Mobile .blank{
+    height: 100px;
+}
+
+.Mobile .button-group{
+    margin-top: 50px;
+}
+
+.Mobile #contral{
+    margin-left:-240px;
+    margin-bottom: -145px; 
+    width: 480px;
+    position:  absolute;
+    height: 290px;
+}
+
+.Mobile .moveButton{
+    width: 290px;
+    height: 290px;
+    top: 0px;
+    left: 190px;
+    position: absolute;
+}
+.moveButton button{
+    margin:-35px;
+    position: absolute ;
+}
+#up{
+    
+    left: 145px;
+    top: 75px;
+}
+#left{
+    left: 75px;
+    top: 145px;
+}
+#right{
+    right: 75px;
+    top: 145px;
+}
+#down{
+    top: 215px;
+    left: 145px;
 }
