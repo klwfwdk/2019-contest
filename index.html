@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/buttons.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <title>Document</title>
+    <script src="./js/mapdata100.js"></script>
+</head>
+
+<body>
+    <div class="gameBox" id="gameBox">
+        <div id="gameInfo" class="clearfix">
+            <div class="gameInfo"></div>
+            <div class="gameInfo"></div>
+        </div>
+        <div class="screen" id="screen">
+            <canvas></canvas>
+        </div>
+        <!-- <div> -->
+            <div class="buttonItem">
+                <button class="button button-block button-rounded button-primary button-large"
+                    onclick="Prev()" id="back">撤销</button>
+                <button class="button button-block button-rounded button-caution button-large"
+                    onclick="init();" id="refresh">重置</button>
+                <div class="blank"></div>
+                <input type="number" name="level" id="level">
+                <button class="button button-block button-rounded button-primary button-large"
+                    onclick="setLevel()" id="setLevel">选关</button>
+                <div class="button-group">
+                    <button type="button" class="button button-pill button-action"
+                        onclick="previousLevel()"><i class="fas fa-long-arrow-alt-left"></i></button>
+                    <button type="button" class="button button-pill button-action"
+                        onclick="nextLevel()"><i class="fas fa-long-arrow-alt-right"></i></button>
+                </div>
+                <!-- <button class="button button-primary button-rounded button-small"class="previous round" onclick="previousLevel()">&#8249;</a>
+                        <button class="button button-primary button-rounded button-small"class="next round" onclick="nextLevel()">&#8250;</a> -->
+            <!-- </div> -->
+            <div class="moveButton">
+                <button id="up" onclick="ListenKey(38)">上</button>
+                <button id="left" onclick="ListenKey(37)">左</button>
+                <button id="right" onclick="ListenKey(39)">右</button>
+                <button id="down" onclick="ListenKey(40)">下</button>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+<script src="./js/mobile.js"></script>
+<script src="./js/game.js"></script>
+
+</html>

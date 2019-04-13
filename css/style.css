@@ -1,0 +1,160 @@
+
+
+
+
+#gameInfo{
+    position: absolute;
+    right:10px;
+    top:10px;
+    width: 200px;
+}
+
+.gameBox{
+    background-color:coral;   
+}
+
+.screen{
+    margin: 0;
+    padding: 0;
+    background-color: brown;
+}
+
+.round {
+    border-radius: 50%;
+}
+
+input{
+    border:none;
+    background-color: transparent;
+    border-bottom: 1px solid #1b9af7;
+    margin: 0;
+    padding: 0;
+    font-size:35px;
+    line-height:40px;
+    width: 170.656px;
+    text-align:center;
+    vertical-align: bottom;
+}
+
+input:focus{
+    border-bottom: 2px solid blueviolet;
+}
+html, body{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+}
+
+/**
+电脑端相关样式
+*/
+.Pc .gameBox{
+    width: 800px;
+    height: 600px;
+    margin-left: -400px;
+    margin-top: -300px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    padding: 15px;
+    float: left;
+}
+
+.Pc .screen{
+        width: 600px;
+        height: 600px;
+        float: left;
+}
+
+.Pc .screen{
+    position: absolute;
+
+}
+
+
+
+.Pc  .moveButton{
+    display: none;
+}
+
+.Pc .buttonItem{
+    display: flex;
+    flex-direction: column ;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    float: right;
+    height: 100%;
+    width: 100%;
+}
+
+.Pc .buttonItem>*{
+    margin-top: 30px;
+    width: 100%
+}
+
+
+
+.Pc .buttonItem>div.blank{
+    height: 100%;
+    flex-grow: 1;
+}
+/**
+手机端相关样式
+*/
+
+.Horizontal .gameBox,.Vertical .gameBox{
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both; 
+    visibility: hidden; 
+    }
+.gameInfo{
+    width: 50%;
+    height: 20px;
+    float: left;
+    text-align: center;
+}
+/* 
+.Horizontal input#level, .Vertical input#level{
+   width: 10;
+} */
+.Vertical #gameInfo{
+
+    position: static;
+    background-image: url(../image/block.png);
+    width: 100%;
+    padding-top: 10px
+}
+
+.Vertical .buttonItem{
+    height: 400px;
+    width: 150px;
+    padding: 20px;
+}
+
+.Vertical #back{
+    float: left;
+}
+
+.Vertical #refresh{
+    float: right;
+}
+
+.Vertical input{
+width: 50px;
+float: left;
+line-height:50px;
+color: aliceblue;
+}
+.Vertical #setLevel{
+    float: right;
+}
+.Vertical .blank{
+    height: 20%;
+}
