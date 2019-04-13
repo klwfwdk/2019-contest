@@ -283,6 +283,7 @@ function ListenKey(event) {
 
     DrawMap(curMap).then(function () {
         let Finish = true;
+        let MovingAble=0;//用来统计当前可移动，且未到达陷阱的箱子的数量，当为0时提示失败
         for (let i = 0; i < curMap.length; i++) {
             const element = curMap[i];
             if (element.indexOf(3) != -1) { //寻找箱子的位置，如果存在不处于陷阱位置的箱子就认为没有通过
@@ -362,7 +363,7 @@ function copyArr(obj) {
     }
     return out;
 }
-
+//用于展示当前游戏信息
 function showInfo() {
     let gameInfoNode=document.getElementById("gameInfo").children;
     gameInfoNode[0].textContent="当前第"+(iCurlevel+1)+"关";
