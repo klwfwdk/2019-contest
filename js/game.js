@@ -1,22 +1,21 @@
-let screen = document.getElementById("screen").children[0];
+// 主要用于游戏控制
+let screen = document.getElementById("screen").children[0];//读取屏幕对象
 let cxt = screen.getContext("2d");
-////console.log(screen.clientWidth / 560.0, screen.clientHeight / 560.0);
-cxt.scale(screen.clientWidth / 560.0, screen.clientHeight / 560.0)
+cxt.scale(screen.clientWidth / 560.0, screen.clientHeight / 560.0)//缩放canvas用于适配不同尺寸的设备
 
-var blockWidth = 35,
-    blockHeight = 35;
+var blockWidth = 35,//一块地图的宽度
+    blockHeight = 35;//一块地图的长度
 var curMap; //当前的地图
 var curLevel; //当前等级的地图
-// var player=document.getElementById("player"); //玩家
-var curPlayer;
-var playerPosition
+var curPlayer;//用于记录当前人物的方向，如up left等
+var playerPosition//用于记录当前人物位置，同时保存当前人物所站位置的原始信息
 var iCurlevel = 0; //当前关卡数
 var moveTimes = 0; //移动了多少次
-var moveHistory = {
+var moveHistory = {//历史记录 用于记录移动次数 同时使用栈实现撤回功能
     his: [],
     push: (arrayIn) => {
         moveTimes++;
-        if (this.his.length > 40) {
+        if (this.his.length > 40) {//为了性能 最多撤回40次
             this.his.shift()
         }
         return this.his.push(arrayIn)
@@ -37,7 +36,7 @@ var moveHistory = {
         his = [];
     }
 }; //记录移动历史
-var imageInfo = [{
+var imageInfo = [{//图像资源，来源于互联网 但是一部分通过ps重新绘制
         name: "block",
         src: "image/block.png"
     },
@@ -76,7 +75,7 @@ var imageInfo = [{
 ]
 var block, wall, box1, box2, trap, up, down, left, right;
 
-function imgPreload(imageInfo, callback) {
+function imgPreload(imageInfo, callback) {//图像预加载
     let count = 0,
         Num = imageInfo.length,
         images = {};
@@ -93,7 +92,7 @@ function imgPreload(imageInfo, callback) {
     }
 }
 
-imgPreload(imageInfo, function (imageInfo) {
+imgPreload(imageInfo, function (imageInfo) {//将加载完成的资源赋值给对应的变量
     ////console.log(images.block);
     block = imageInfo.block;
     wall = imageInfo.wall;
@@ -107,7 +106,7 @@ imgPreload(imageInfo, function (imageInfo) {
     init();
 });
 //返回一个位置为xy的点的记录
-function Position(x, y) {
+function Position(x, y) {//用于存储一个点的坐标与当前内容与原始信息，同时可以实现边缘控制
     this.x = x;
     this.y = y;
     if (x < 0 || y < 0 || x > 16 || y > 16) {
@@ -125,18 +124,18 @@ function Position(x, y) {
     }
 
 }
-
+//初始化函数，同时用于关卡切换后的重绘
 function init() {
     moveTimes=0;//重置步数
     curMap = copyArr(maps[iCurlevel]); //构建用于缓存的地图
     curLevel = maps[iCurlevel]; //当前等级的初始地图
     curPlayer = down; //初始化小人
-    moveHistory.clean();
+    moveHistory.clean();//清理历史记录
     playerPosition = new Position(5, 5); //设置小人位置，数值随意 因为在接下来会被修改
     DrawMap(curMap); //绘制出当前等级的地图
 }
 
-async function DrawMap(mapInfo) {
+async function DrawMap(mapInfo) {//传入一个数组 然后根据数组内容重绘地图
     for (var i = 0; i < 16; i++) {
         for (var j = 0; j < 16; j++) {
             ////console.log(blockHeight, blockWidth)
@@ -158,7 +157,7 @@ async function DrawMap(mapInfo) {
                     pic = box1;
                     break;
                 case 4: //玩家
-                    pic = curPlayer; //小人有四个方向 具体显示哪个图片需要和上下左右方位值关联
+                    pic = curPlayer; 
                     // 获取小人的坐标位置
                     playerPosition = new Position(i, j);
                     if (playerPosition.defInfo == 2) {
@@ -166,20 +165,17 @@ async function DrawMap(mapInfo) {
                         await cxt.drawImage(pic, blockWidth * j - (pic.width - blockWidth) / 2, blockHeight * i - (pic.height - blockHeight), pic.width, pic.height)
                     }
                     break;
-                case 5: //绘制箱子及陷进位置
+                case 5: //绘制箱子及陷阱位置
                     pic = box2;
                     break;
             }
-            
-            //每个图片不一样宽 需要在对应地板的中心绘制地图
            await cxt.drawImage(pic, blockWidth * j - (pic.width - blockWidth) / 2, blockHeight * i - (pic.height - blockHeight), pic.width, pic.height)
         }
     }
-    await showInfo()
+    await showInfo()//设置当前步数与关卡
 }
 
-function tryMoving(direction) {
-    //console.log(direction);
+function tryMoving(direction) {//尝试移动，如果能够移动就移动
     var point1;
     var point2;
     var Acce = Array(0, 2) //point2需要为这两者才能推动
@@ -227,14 +223,13 @@ function tryMoving(direction) {
             curMap[point1.x][point1.y] = 4;
             playerPosition = new Position(point1.x, point1.y);
             break;
-        case 3:
+        case 3://前面为箱子
             if (Acce.indexOf(point2.curInfo) !== -1) {
                 curMap[point2.x][point2.y] += 3; //将箱子向前推
                 curMap[point1.x][point1.y] = 4; //将人向前移
                 curMap[playerPosition.x][playerPosition.y] = playerPosition.defInfo; //将人原来的位置重置
-                playerPosition = new Position(point1.x, point1.y)
             } else {
-                return false;
+                return false;//推不动 返回false
             }
             break;
         case 5: //与前方是箱子相同
@@ -252,9 +247,7 @@ function tryMoving(direction) {
     return true;
 }
 
-// //console.log(screen,screen.clientWidth,screen.clientHeight)
-function ListenKey(event) {
-    ////console.log(moveHistory)
+function ListenKey(event) {//监听输入
     moveHistory.push(copyArr(curMap)) //将现有的地图数据入栈
     let acceAble = false;
     let code;
@@ -282,29 +275,28 @@ function ListenKey(event) {
     }
 
     DrawMap(curMap).then(function () {
-        let Finish = true;
-        let MovingAble=0;//用来统计当前可移动，且未到达陷阱的箱子的数量，当为0时提示失败
-        for (let i = 0; i < curMap.length; i++) {
-            const element = curMap[i];
-            if (element.indexOf(3) != -1) { //寻找箱子的位置，如果存在不处于陷阱位置的箱子就认为没有通过
-                Finish = false;
-                ////console.log(element,element.indexOf(3))
-                break;
-            }
-        }
-
-        if (Finish) {
+        var state=curState(curMap) 
+        switch (state) {
+            case 1:
             sleep(20).then(() => {
-                alert("恭喜过关！！");
-                setLevel(iCurlevel + 1);
+                alert("恭喜过关，马上开始下一关");
+                nextLevel();
             })
+                break;
+            case 2:
+            sleep(20).then(() => {
+                alert("死锁失败了");
+                init();
+            })
+            default:
+                break;
         }
     });
-    if (!acceAble) {
+    if (!acceAble) {//如果当前操作没有影响地图矩阵 将先前入栈的记录丢弃掉
         moveHistory.pop(); //如果方案不可行 出栈
     }
 }
-
+//跳关，关卡为input中的数据
 function setLevel() {
     let level = document.getElementById("level").value-1;
     if (!Number.isInteger(level)) {
@@ -325,7 +317,7 @@ function setLevel() {
     }
     init();
 }
-
+//下一关
 function nextLevel(){
     iCurlevel++;
     if (iCurlevel>maps.length-1) {
@@ -334,17 +326,18 @@ function nextLevel(){
     }
     init();
 }
+//上一关
 function previousLevel(){
     iCurlevel--;
     iCurlevel=iCurlevel<0?0:iCurlevel;
     init();
 }
 document.onkeydown = ListenKey
-//延迟执行
+//延迟执行函数，主要用于用户完成地图后等待canvas绘图完成后再提示完成
 function sleep(time) {
     return new Promise((resolve) => setTimeout(resolve, time));
 }
-
+//撤销操作，能退回一步
 function Prev() {
 
     let popMap = moveHistory.pop();
@@ -369,4 +362,63 @@ function showInfo() {
     gameInfoNode[0].textContent="当前第"+(iCurlevel+1)+"关";
     gameInfoNode[1].textContent="你移动了"+moveTimes+"步";
     document.getElementById("level").value=iCurlevel+1;
+}
+//分析当前状态 return2为死锁 1为完成
+function curState(curMap){
+    const w=16,h=16;
+    let count3=0
+    for (let i = 0; i < curMap.length; i++) {
+        const line = curMap[i];
+        for (let j = 0; j < line.length; j++) {
+            const point = line[j];
+            if (point===3) {
+                count3++;
+                console.log(isLock(curMap,i,j))
+                if (isLock(curMap,i,j)) {
+                  return 2 
+                }
+            }
+        }
+    }
+    if (count3===0) {
+        return 1
+    }else return "Unfinished"
+}
+//用于读取当前块（只能为箱子）是否死锁（无法被移动且尚未到达陷阱） 当前只能判断一部分情况
+function isLock(curMap,i,j){
+    let dic=[1,3,5];
+    let num
+
+    function c(...k) {
+        let num=0;
+        for (let i = 0; i < k.length; i++) {
+            const element = k[i];
+            if (dic.indexOf(element)!=-1) {
+                num++;
+            }
+        }
+        return num;
+    }
+    // 判断墙角死锁
+    if ((curMap[i-1][j]===1&&curMap[i][j-1]===1)||(curMap[i+1][j]===1&&curMap[i][j+1]===1)||(curMap[i+1][j]===1&&curMap[i][j-1]===1)||(curMap[i-1][j]===1&&curMap[i][j+1]===1)) {
+        return true;//返回死锁
+    }
+    //判断四格锁死，和靠墙连续锁死
+    num=c(curMap[i+1][j+1],curMap[i][j+1],curMap[i+1][j])
+    if (num===3) {
+        return true;
+    }
+    num=c(curMap[i-1][j-1],curMap[i][j-1],curMap[i-1][j])
+    if (num===3) {
+        return true;
+    }
+    num=c(curMap[i+1][j-1],curMap[i][j-1],curMap[i+1][j])
+    if (num===3) {
+        return true;
+    }
+    num=c(curMap[i-1][j+1],curMap[i][j+1],curMap[i-1][j])
+    if (num===3) {
+        return true;
+    }
+return false
 }

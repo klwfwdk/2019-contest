@@ -1,4 +1,4 @@
-<!-- 这个版本使用本地的css与js，图像资源，但是也能够完美通过chrome浏览器调试模式的模拟手机测试 -->
+<!--这个版本使用在线的css与js，主要用于解决手机真机测试时无法读取到本地css与js的问题 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,13 +8,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="screen-orientation" content="portrait">
     <meta name="x5-orientation" content="portrait">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/buttons.css">
+    <!-- 阻止手机双击放大 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="https://sp-1253807280.cos.ap-guangzhou.myqcloud.com/css/style.css">
+    <link rel="stylesheet" href="https://sp-1253807280.cos.ap-guangzhou.myqcloud.com/css/buttons.css">
+    <!--使用了一个在线的符号库 -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"> -->
     <title>推箱子小游戏</title>
-    <script src="./js/mapdata100.js"></script>
+    <script src="https://sp-1253807280.cos.ap-guangzhou.myqcloud.com/js/mapdata100.js"></script>
 </head>
 
 <body>
@@ -61,7 +64,7 @@
 
     </div>
 </body>
-<script src="./js/mobile.js"></script>
-<script src="./js/game.js"></script>
+<script src="https://sp-1253807280.cos.ap-guangzhou.myqcloud.com/js/mobile.js"></script>
+<script src="https://sp-1253807280.cos.ap-guangzhou.myqcloud.com/js/game.js"></script>
 
 </html>
