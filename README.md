@@ -29,5 +29,7 @@
 - 已经实现能够选择关卡难度
 - 能够判断成功，能判断简单的失败情况
 - 适配手机端，扫描二维码即可
--![](https://sp-1253807280.cos.ap-guangzhou.myqcloud.com/%E6%89%8B%E6%9C%BA%E7%9C%9F%E6%9C%BA%E6%B5%8B%E8%AF%95.png)
--[或者点击这里](https://sp-1253807280.cos.ap-guangzhou.myqcloud.com/index-online.html)
+
+![](https://sp-1253807280.cos.ap-guangzhou.myqcloud.com/%E6%89%8B%E6%9C%BA%E7%9C%9F%E6%9C%BA%E6%B5%8B%E8%AF%95.png)
+
+[或者点击这里](https://sp-1253807280.cos.ap-guangzhou.myqcloud.com/index-online.html)
