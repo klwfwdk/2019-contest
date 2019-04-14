@@ -24,3 +24,11 @@
 参加 2019 年前端星计划的学生 fork 本项目，编辑.75camp文件，添加姓名和学号后4位，用于验证身份。
 
 完成作品后将项目URL提交到奇舞学院测试试卷的相关题目的答案中。
+
+## 已经实现的功能
+- 已经实现能够选择关卡难度
+- 能够判断成功，能判断简单的失败情况
+- 适配手机端，扫描二维码即可
+！[](https://sp-1253807280.cos.ap-guangzhou.myqcloud.com/%E6%89%8B%E6%9C%BA%E7%9C%9F%E6%9C%BA%E6%B5%8B%E8%AF%95.png)
+https://sp-1253807280.cos.ap-guangzhou.myqcloud.com/index-online.html
+![或者点击这里](https://sp-1253807280.cos.ap-guangzhou.myqcloud.com/index-online.html)
